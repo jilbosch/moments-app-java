@@ -1,5 +1,0 @@
-CREATE TABLE moments (
-id BIGINT AUTO INCREMENT NOT NULL,
-    name VARCHAR (255),
-    CONNECTION
-    )

@@ -16,12 +16,17 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Moment {
-    private String name;
+    private String title;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany (mappedBy = "moment")
     private List<Comment> comments = new ArrayList<>();
+
+    private String img_Url;
+
+    private String descripcion;
+
 
     }
