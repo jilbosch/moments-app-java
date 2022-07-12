@@ -4,10 +4,7 @@ import com.proves1.imatges.models.Imatge;
 import com.proves1.imatges.models.Moment;
 import com.proves1.imatges.repositories.IMomentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @CrossOrigin(origins="*")
@@ -30,9 +27,19 @@ public class MomentControllers {
 
 
     @GetMapping("/moments/{id}")
-    Moment moment(@PathVariable Long id) {
+    Moment getMomentsById(@PathVariable Long id) {
         Moment moment = this.momentRepository.findById(id).get();
         return moment;
 
+    }
+
+    @DeleteMapping("/moments/{id}")
+    void deleteMomentsById(@PathVariable Long id) {
+        momentRepository.deleteById(id);
+    }
+    @PostMapping("/moments")
+    Moment saveMoments (@RequestBody Moment newMoment){
+        Moment moment = this.momentRepository.save(newMoment);
+        return moment;
     }
 }
