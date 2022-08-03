@@ -14,11 +14,6 @@ public class MomentControllers {
     @Autowired
     private IMomentRepository momentRepository;
 
-    @GetMapping("/health")
-    String helthcheck() {
-        return "benvingut";
-    }
-
     @GetMapping("/moments")
     List<Moment> getAll() {
         var momentsList = this.momentRepository.findAll();
@@ -37,9 +32,23 @@ public class MomentControllers {
     void deleteMomentsById(@PathVariable Long id) {
         momentRepository.deleteById(id);
     }
+    @PutMapping("/moments/{id}")
+
+    Moment updateMoment(@PathVariable Long id, @RequestBody Moment editedMoment){
+        Moment moment = this.momentRepository.findById(id).get();
+        moment.setTitle(editedMoment.getTitle());;
+        moment.setDescripcion(editedMoment.getDescripcion());
+        moment.setImg_Url(editedMoment.getImg_Url());
+        Moment updatedMoment = this.momentRepository.save(moment);
+        return updatedMoment;
+    }
     @PostMapping("/moments")
     Moment saveMoments (@RequestBody Moment newMoment){
         Moment moment = this.momentRepository.save(newMoment);
         return moment;
+    }
+    @GetMapping(value = "/moments",params = "search")
+    List<Moment> getSearch(@RequestParam String search){
+        return momentRepository.findByDescripcionOrTitleContaining(search);
     }
 }
