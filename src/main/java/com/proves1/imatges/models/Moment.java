@@ -5,11 +5,15 @@ package com.proves1.imatges.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@EntityScan("com.netsurfingzone.entity")
 @Data
 @Entity
 @Table(name="Moments")
@@ -24,7 +28,7 @@ public class Moment {
     @OneToMany (mappedBy = "moment")
     private List<Comment> comments = new ArrayList<>();
 
-    private String img_Url;
+    private String imgUrl;
 
     private String descripcion;
 
